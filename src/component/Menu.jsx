@@ -5,8 +5,11 @@ import { IoBrush, IoCamera, IoCube, IoFilm, IoGlobe, IoRefresh } from 'react-ico
 import { IoColorPalette } from 'react-icons/io5';
 
 export function Menu({ isOpen }) {
-
   const [brandDescription, setBrandDescription] = useState('');
+  const [selectedAspectRatio, setSelectedAspectRatio] = useState(null);
+  const [selectedImageStyle, setSelectedImageStyle] = useState(null);
+  const [selectedGenerationPace, setSelectedGenerationPace] = useState(null);
+  const [selectedCreativeCount, setSelectedCreativeCount] = useState(null);
 
   const handleDescriptionChange = (e) => {
     if (e.target.value.length <= 50) {
@@ -14,35 +17,41 @@ export function Menu({ isOpen }) {
     }
   };
 
+  const selectedButtonStyle = {
+    border: '1px solid',
+    borderImageSource: 'linear-gradient(90deg, #C85ED8 0%, #A079F8 70.57%)',
+    borderImageSlice: 1
+  };
+
   return (
     <div
-  className={`
-    w-[16.563rem]
-    h-full  
-    [background:linear-gradient(209.2deg,_#3F51B5_42.5%,_#673AB7_92.49%)]
-    [box-shadow:0_0_14.9px_0_#0000001F]
-    rounded-[0.625rem]
-    text-white
-    transform
-    transition-transform
-    duration-500
-    ease-in-out
-    ${isOpen ? 'translate-x-2' : '-translate-x-full'} 
-    lg:translate-x-4
-    z-10
-  `}
->
-
-      <div className="border-white/20 flex gap-3 p-4 border-b">
+      className={`
+        w-64
+        h-full  
+        [background:linear-gradient(209.2deg,_#3F51B5_42.5%,_#673AB7_92.49%)]
+        [box-shadow:0_0_14.9px_0_#0000001F]
+        rounded-md
+        text-white
+        transform
+        transition-transform
+        duration-500
+        ease-in-out
+        ${isOpen ? 'translate-x-2' : '-translate-x-full'} 
+        lg:translate-x-4
+        z-10
+      `}
+    >
+      <div className="border-white/20 flex gap-1 p-2 border-b">
         <button className="text-xs leading-[100%] py-1 px-2 text-white/80">Ad Copy</button>
-        <button className="font-semibold text-xs py-1 px-2 text-[12px] leading-[100%] tracking-[0%]">Ad Creative</button>
+        <button className="font-semibold text-xs py-2 px-2 text-[12px] leading-[100%] tracking-[0%] border-b-3" style={{
+          borderImageSource: 'linear-gradient(90deg, #C85ED8 0%, #A079F8 70.57%)',
+          borderImageSlice: 1
+        }}>Ad Creative</button>
         <button className="text-xs leading-[100%] py-1 px-2 text-white/80">Ad Video</button>
       </div>
 
       <div className='flex flex-col'>
-
         <div className='border-white/20 flex flex-col gap-3 p-3 border-b'>
-
           <div className="flex flex-col gap-2">
             <label htmlFor="platform" className="flex items-center gap-1">
               <span className="font-normal text-xs leading-[100%]">Select Platform</span>
@@ -95,31 +104,41 @@ export function Menu({ isOpen }) {
               <div id="charCount" className="bottom-2 right-2 text-white/60 absolute text-[6px]">{brandDescription.length}/50 characters</div>
             </div>
           </div>
-
         </div>
 
         <div className='border-white/20 flex flex-col gap-3 p-3 border-b'>
-
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-1">
-              <label class="font-normal text-xs leading-[100%]">Aspect Ratio</label>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-1">
+              <label className="font-normal text-xs leading-[100%]">Aspect Ratio</label>
               <FaRegQuestionCircle className="opacity-40 w-3 h-3 text-white" />
             </div>
-            <div class="flex gap-2">
-              <button class="w-[68.94px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
-                <div class="w-5 h-5 bg-[#474CB5] rounded-[2px] border-[0.5px] border-white opacity-60"></div>
-                <span class="font-normal text-xs leading-[100%] text-white">1:1</span>
+            <div className="flex gap-2">
+              <button
+                className="w-[68.94px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedAspectRatio === '1:1' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedAspectRatio('1:1')}
+              >
+                <div className="w-5 h-5 bg-[#474CB5] rounded-[2px] border-[0.5px] border-white opacity-60"></div>
+                <span className="font-normal text-xs leading-[100%] text-white">1:1</span>
               </button>
-              <button class="w-[68.94px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
-                <div class="w-3 h-5 bg-[#474CB5] rounded-[2px] border-[0.5px] border-white opacity-60"></div>
-                <span class="font-normal text-xs leading-[100%] text-white">2:3</span>
+              <button
+                className="w-[68.94px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedAspectRatio === '2:3' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedAspectRatio('2:3')}
+              >
+                <div className="w-3 h-5 bg-[#474CB5] rounded-[2px] border-[0.5px] border-white opacity-60"></div>
+                <span className="font-normal text-xs leading-[100%] text-white">2:3</span>
               </button>
-              <button class="w-[68.94px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
-                <div class="w-5 h-3 bg-[#474CB5] rounded-[2px] border-[0.5px] border-white opacity-60"></div>
-                <span class="font-normal text-xs leading-[100%] text-white">16:9</span>
+              <button
+                className="w-[68.94px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedAspectRatio === '16:9' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedAspectRatio('16:9')}
+              >
+                <div className="w-5 h-3 bg-[#474CB5] rounded-[2px] border-[0.5px] border-white opacity-60"></div>
+                <span className="font-normal text-xs leading-[100%] text-white">16:9</span>
               </button>
-              <button class="w-[21px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center">
-                <IoIosArrowDown class="w-3 h-3 text-white"></IoIosArrowDown>
+              <button className="w-[21px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center">
+                <IoIosArrowDown className="w-3 h-3 text-white" />
               </button>
             </div>
           </div>
@@ -130,27 +149,51 @@ export function Menu({ isOpen }) {
               <FaRegQuestionCircle className="opacity-40 w-3 h-3 text-white" />
             </div>
             <div className="grid grid-cols-3 grid-rows-2 gap-2">
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedImageStyle === 'Auto' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedImageStyle('Auto')}
+              >
                 <IoRefresh className="opacity-40 w-3 h-3 text-white" />
                 <span className="font-normal text-xs leading-[100%] text-white">Auto</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedImageStyle === 'General' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedImageStyle('General')}
+              >
                 <IoGlobe className="opacity-40 w-3 h-3 text-white" />
                 <span className="font-normal text-xs leading-[100%] text-white">General</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedImageStyle === 'Realistic' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedImageStyle('Realistic')}
+              >
                 <IoCamera className="opacity-40 w-3 h-3 text-white" />
                 <span className="font-normal text-xs leading-[100%] text-white">Realistic</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedImageStyle === 'Design' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedImageStyle('Design')}
+              >
                 <IoBrush className="opacity-40 w-3 h-3 text-white" />
                 <span className="font-normal text-xs leading-[100%] text-white">Design</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedImageStyle === '3D' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedImageStyle('3D')}
+              >
                 <IoCube className="opacity-40 w-3 h-3 text-white" />
                 <span className="font-normal text-xs leading-[100%] text-white">3D</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedImageStyle === 'Anime' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedImageStyle('Anime')}
+              >
                 <IoFilm className="opacity-40 w-3 h-3 text-white" />
                 <span className="font-normal text-xs leading-[100%] text-white">Anime</span>
               </button>
@@ -163,13 +206,25 @@ export function Menu({ isOpen }) {
               <FaRegQuestionCircle className="opacity-40 w-3 h-3 text-white" />
             </div>
             <div className="grid grid-cols-3 gap-2">
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedGenerationPace === 'Fast' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedGenerationPace('Fast')}
+              >
                 <span className="font-normal text-xs leading-[100%] tracking-[0%]">Fast</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedGenerationPace === 'Medium' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedGenerationPace('Medium')}
+              >
                 <span className="font-normal text-xs leading-[100%] tracking-[0%]">Medium</span>
               </button>
-              <button className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1">
+              <button
+                className="w-[77px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedGenerationPace === 'Slow' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedGenerationPace('Slow')}
+              >
                 <span className="font-normal text-xs leading-[100%] tracking-[0%]">Slow</span>
               </button>
             </div>
@@ -181,11 +236,41 @@ export function Menu({ isOpen }) {
               <FaRegQuestionCircle className="opacity-40 w-3 h-3 text-white" />
             </div>
             <div className="flex gap-2">
-              <button className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"><span className="font-normal text-xs leading-[100%] tracking-[0%]">1</span></button>
-              <button className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"><span className="font-normal text-xs leading-[100%] tracking-[0%]">2</span></button>
-              <button className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"><span className="font-normal text-xs leading-[100%] tracking-[0%]">3</span></button>
-              <button className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"><span className="font-normal text-xs leading-[100%] tracking-[0%]">4</span></button>
-              <button className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"><span className="font-normal text-xs leading-[100%] tracking-[0%]">5</span></button>
+              <button
+                className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedCreativeCount === '1' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedCreativeCount('1')}
+              >
+                <span className="font-normal text-xs leading-[100%] tracking-[0%]">1</span>
+              </button>
+              <button
+                className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedCreativeCount === '2' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedCreativeCount('2')}
+              >
+                <span className="font-normal text-xs leading-[100%] tracking-[0%]">2</span>
+              </button>
+              <button
+                className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedCreativeCount === '3' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedCreativeCount('3')}
+              >
+                <span className="font-normal text-xs leading-[100%] tracking-[0%]">3</span>
+              </button>
+              <button
+                className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedCreativeCount === '4' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedCreativeCount('4')}
+              >
+                <span className="font-normal text-xs leading-[100%] tracking-[0%]">4</span>
+              </button>
+              <button
+                className="w-[31px] h-[30px] bg-[#3445A1] rounded-[5px] border-[0.5px] border-white/20 flex items-center justify-center gap-1"
+                style={selectedCreativeCount === '5' ? selectedButtonStyle : {}}
+                onClick={() => setSelectedCreativeCount('5')}
+              >
+                <span className="font-normal text-xs leading-[100%] tracking-[0%]">5</span>
+              </button>
             </div>
           </div>
 
@@ -210,10 +295,7 @@ export function Menu({ isOpen }) {
                 <IoIosArrowDown className="w-3 h-3 text-white" />
               </button>
             </div>
-
-
           </div>
-
         </div>
 
         <div className="justify-end p-2 mt-32">
@@ -236,10 +318,7 @@ export function Menu({ isOpen }) {
             </div>
           </div>
         </div>
-
       </div>
-
-
     </div>
   );
 }

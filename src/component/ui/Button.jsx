@@ -2,20 +2,31 @@ import React, { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 
 export function HomeButton() {
+  const [isPressed, setIsPressed] = useState(false);
+  
   return (
     <button 
-      className="
-        w-[101px] 
-        h-[42px] 
-        rounded-[32px] 
-        [background:linear-gradient(90deg,_#C85ED8_0%,_#A079F8_70.57%)] 
-        [box-shadow:0px_0px_14.9px_0px_#0000001F]
+      className={`
+        w-24
+        h-10
+        rounded-full
+        bg-gradient-to-r
+        from-purple-500
+        to-indigo-400
+        shadow-md
         font-medium 
         text-lg 
-        leading-[100%] 
-        tracking-[0%] 
         text-white
-      "
+        transition-all
+        duration-300
+        ${isPressed 
+          ? 'opacity-90 transform scale-95 shadow-sm' 
+          : 'hover:shadow-lg hover:brightness-110'
+        }
+      `}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
     >
       Home
     </button>
@@ -23,20 +34,31 @@ export function HomeButton() {
 }
 
 export function EmulateButton() {
+  const [isPressed, setIsPressed] = useState(false);
+  
   return (
     <button
-      className="
-        w-[175px] 
-        h-[31px] 
-        rounded-[15.5px] 
-        [background:linear-gradient(284.35deg,_#C85ED8_-20.82%,_#6D3DDA_108.46%)]
+      className={`
+        w-44
+        h-8
+        rounded-full
+        bg-gradient-to-r
+        from-purple-500
+        to-indigo-600
         font-semibold 
-        text-[11px] 
-        leading-[100%] 
-        tracking-[0px] 
+        text-xs
         text-white
         flex items-center justify-center gap-1
-      "
+        transition-all
+        duration-300
+        ${isPressed 
+          ? 'opacity-90 transform scale-95 shadow-sm' 
+          : 'hover:shadow-lg hover:brightness-110'
+        }
+      `}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
     >
       <IoSearch className="w-4 h-4 text-yellow-500" />
       Emulate Competitor Ads
